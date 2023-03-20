@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div
+    style="  position: absolute; left: 0; margin: 0; padding: 0; height:550px ; width: 100%; background-image:  url('../static/img/fondo2.jpg'); background-color: rgba(0, 0, 0, 0.696);background-size: cover;">
+    <div
+        style="background-color: rgba(0, 0, 0, 0.562);left: 0;  height:550px ; width: 100%; margin: 0; padding: 0; position: absolute;background-size: cover;">
+        <br>
+        <br>
+        <h3 style="color: white; padding-left: 150px;">INICIO DE SESIÓN</h3>
+        <center>
+            <br>
+            <div class="card text-white  mb-3"
+                style="width: 25rem; background-color: rgba(0, 0, 0, 0.908); border-radius: 20px;">
+                <div class="card-body">
+
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="notification is-danger">
+                        {{ messages[0] }}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    <form method="POST" action="/security/login">
+                        <br>
+                        <div class="field">
+                            <div class="control">
+                                <label for="email">Correo electrónico:</label>
+                                <br>
+                                <input class="input is-large" type="email" name="email" placeholder="Your Email"
+                                    autofocus="">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="field">
+                            <div class="control">
+                                <label for="email">Contraseña:</label>
+                                <br>
+                                <input class="input is-large" type="password" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="field">
+                            <label style="color: white;" class="checkbox">
+                                <input type="checkbox">
+                                Recuerdame
+                            </label>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+    </center>
+    <br>
+    <br>
+</div>
+</div>
+{% endblock %}

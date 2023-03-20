@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<center>
+<h1 class="title" style="color: white;">
+  Bienvenido, {{ name }}!
+</h1>
+
+<br>
+
+{% if rol == '[<Role 1>]'%}
+  <form method="POST" action="/security/productos" >
+  <a id="reg" type="button" href="{{ url_for('auth.productos') }}" style=" color: white;   padding-right: 20px;    text-decoration:none;" class="btn btn-primary">
+    Administracion de productos
+</a>
+</form>
+{%endif%}
+
+<br>
+
+  <h3  style="color: white;">Catalogo de juegos</h3>
+<div style="overflow: auto; height: 350px;">
+        
+  <table style="border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in resultado %}
+      <tr>
+        <td>
+          <img src="data:image/jpeg;base64,{{ r.img}}" alt="" width="100px" height="150px" style="display: inline-block; vertical-align: middle;">
+          <div style="display: inline-block; vertical-align: middle;">
+            <h2 style="color: white; display: inline-block; margin: 0;">{{ r.nombre }}</h2>
+            <br>
+            <label style="color: white; display: inline-block;">{{ r.descripcion }}</label>
+            <br>
+          </div>
+        </td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+</center>
+
+{% endblock %}

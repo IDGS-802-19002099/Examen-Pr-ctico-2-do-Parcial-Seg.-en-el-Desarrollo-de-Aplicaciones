@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="overflow: auto;">
+  <div style="float: left; width: 50%;">
+    
+    
+      <div style="overflow: auto; height: 550px;  border-right: 1px solid white;">
+        
+        <h3  style="color: white; padding-left: 150px; ">Catalogo de juegos</h3>
+        <table style="border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in resultado %}
+            <tr>
+              <td>
+                <img src="data:image/jpeg;base64,{{ r.img}}" alt="" width="100px" height="150px" style="display: inline-block; vertical-align: middle;">
+                <div style="display: inline-block; vertical-align: middle;">
+                  <h2 style="color: white; display: inline-block; margin: 0;">{{ r.nombre }}</h2>
+                  <br>
+                  <label style="color: white; display: inline-block;">{{ r.descripcion }}</label>
+                  <br>
+
+                  
+                  <form action="{{ url_for('auth.eliminarProducto') }}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="{{ r.id }}">
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                </form>
+                
+                <form action="{{ url_for('auth.modificarProducto') }}" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="{{ r.id }}">
+                  <input type="hidden" name="nombre" value="{{ r.nombre }}">
+                  <input type="hidden" name="descripcion" value="{{ r.descripcion }}">
+                  <input type="hidden" name="img" value="{{ r.img }}">
+                  <button class="btn btn-warning" type="submit">Modificar</button>
+              </form>
+
+                </div>
+              </td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      
+      <br>
+      <form action="{{ url_for('auth.obtenerProductos') }}" method="post" enctype="multipart/form-data">
+      <button class="btn btn-primary" type="submit"> Recargar</button>
+      </form>
+  </div>
+
+
+
+
+
+  <div style="float: right; width: 50%; padding-left: 20px;">
+    
+    <h3  style="color: white; padding-left: 150px;">LLena este formato</h3>
+  <form id="myForm" action="{{ url_for('auth.registrarProductos') }}" method="post" enctype="multipart/form-data">
+    <div class="field">
+      <div class="control">
+        <h3 style="color: white; display: inline-block; margin: 0;">ID de juego:</h3>
+        <br>
+        <input class="input is-large" type="text" name="id" placeholder="id" value="{{id}}" >
+      </div>
+    </div>
+    <br>
+  
+  
+  
+    <div class="field">
+    <div class="control">
+
+      <h3 style="color: white; display: inline-block; margin: 0;">Nombre:</h3>
+      <br>
+      <input class="input is-large" type="text" name="nombre" placeholder="nombre" value="{{nombre}}">
+    </div>
+  </div>
+<br>
+  <div class="field">
+    <div class="control">
+      <h3 style="color: white; display: inline-block; margin: 0;">Descripcion:</h3>
+      <br>
+      <input class="input is-large" type="text" name="descripcion" placeholder="descripcion" value="{{descripcion}}">
+    </div>
+  </div>
+<br>
+  <div class="field">
+    <div class="control">
+      
+      <h3 style="color: white; display: inline-block; margin: 0;">Selecciona la imagen:</h3>
+      <br>
+      <input class="form-control-file" type="file" id="imagen" name="imagen"><br>
+    </div>
+  </div>
+  <br>
+
+  <button class="btn btn-primary" type="submit"> Guardar</button>
+  
+</form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
